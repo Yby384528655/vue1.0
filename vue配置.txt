@@ -1,0 +1,38 @@
+安装node.js
+
+1.安装脚手架工具vue-cli
+npm install -g vue-cli;
+
+2.安装项目目录：
+vue init webpack(#1.0 是否是1.0版本) project_name
+	设置：ESLint----no
+	      unit  ----no
+
+3.进入目录，安装项目依赖
+
+npm install;
+
+（1.0中有一个git下载下不了，要单独安装npm install --registry=http://registry.npm.taobao.org）
+
+
+4.启动项目
+npm run dev
+
+
+
+5 vue-router
+
+npm install vue-router@0.7.13(vue1.0版本的)
+
+
+
+
+
+注意：(在编辑器中)
+
+（webstorm）
+1：javascript5改成javascript6
+2：添加生成.vue文件
+3：安装vue插件
+4:按照自己喜欢是否安装mint-ui（网址：http://mint-ui.github.io/#!/zh-cn）
+5:安装mint-ui---npm install mint-ui(@1:版本号)
