@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>2</title>
+	<script src='vue.js'></script>
+</head>
+<body>
+<div id="example">
+	<!-- <my-component></my-component> -->
+<!-- 	<div>
+		<input v-model='parentMsg'><br/>
+		<child v-bind:my-message='parentMsg'></child>
+	</div> -->
+<!-- 	<template id="child-template">
+		<input v-model='msg'>
+		<button v-on:click='notify'>dispatch event</button>
+	</template>
+	<div id="events-example">
+		<p>Message:{{messages | json }}</p>
+		<child></child>
+	</div> -->
+	<template id="child-template">
+	<div>
+	  <slot name="one"></slot>
+	  <slot></slot>
+	  <slot name="two"></slot>
+	</div>
+	</template>
+	<template id="parent-template">
+		<child-template>
+  			<p slot="one">One</p>
+		  	<p slot="two">Two</p>
+		  	<p>Default A</p>
+  		</child-template>
+	</template>
+	<div>
+		<parent-template></parent-template>
+	</div>
+</div>
+</body>
+</html>
+<script>
+	// var MyComponent =Vue.extend({
+	// 	template:'<div>A custom component!</div>'
+	// })
+	// Vue.component('my-component',MyComponent);
+	// var Child=Vue.extend({
+	// 	template:'<div>A child custom component!</div>'
+	// })
+	// var Parent = Vue.extend({
+	// 	template:'<div>A parent custom component!</div><my-component></my-component>'
+	// 		'my-component':Child
+	// })
+	// Vue.component('my-component',{
+	// 	template:'<div>A custom component!</div>'
+	// })
+	// var Parent=Vue.extend({
+	// 	compoonents:{
+	// 		'my-component':{
+	// 			template:'<div A custom component!</div>'
+	// 		}
+	// 	}
+	// })
+	// Vue.component('child',{
+	// 	props:['myMessage'],
+	// 	template:'<span>{{myMessage}}</span>'
+	// })
+	// Vue.component('child',{
+	// 	template:'#child-template',
+	// 	data:function(){
+	// 		return {
+	// 			msg :'hello'
+	// 		}
+	// 	},
+	// 	methods:{
+	// 		notify:function(){
+	// 			if(this.msg.trim()){
+	// 				this.$dispatch('child-msg',this.msg)
+	// 				this.msg=''
+	// 			}
+	// 		}
+	// 	}
+	// })
+	// var Parent = new Vue({
+	// 	el:'#events-example',
+	// 	data:{
+	// 		messages:[]
+	// 	},
+	// 	events:{
+	// 		'child-msg':function(msg){
+	// 			this.messages.push(msg)
+	// 		}
+	// 	}
+	// })
+	Vue.component('child-template',{
+		template:'#child-template'
+	})
+	Vue.component('parent-template',{
+		template:'#parent-template'
+	})
+
+
+
+
+
+
+
+
+
+
+
+	new Vue({
+		el:'#example'
+	})
+</script>

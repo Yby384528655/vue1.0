@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>6</title>
+	<script src='vue.js'></script>
+</head>
+<body>
+<div id="app">
+<div id="demo">
+	<template v-for='branch in branches'>
+		<input type="radio"
+	      name="branch"
+	      :id="branch"
+	      :value="branch"
+	      v-model="currentBranch">
+	    <label :for="branch">{{branch}}</label>
+	</template>
+	<p>vuejs/vue@{{currentBranch}}</p>
+</div>
+</div>
+</body>
+</html>
+<script>
+var demo = new Vue({
+  el: '#demo',
+  data: {
+    branches: ['master', 'dev'],
+    currentBranch: 'dev',
+    commits: null
+  }
+
+})
+</script>

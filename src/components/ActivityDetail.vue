@@ -1,0 +1,1 @@
+ActivityDetail.vue

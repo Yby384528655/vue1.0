@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ceshi</title>
+	<script src='vue.js'></script>
+</head>
+<body>
+<div id="app">
+	<p>{{message}}</p>
+	<input v-model='message'>
+	<ul>
+		<li v-for='todo in todos'>{{todo.text}}</li>
+	</ul>
+	<p v-if='getting' v-on:click='chooseget'>adsfadsfasdfasdf</p>
+	<p>{{{vhtml}}}</p>
+	<p>{{number+1}}</p>
+	<p>{{ok ? "yes":'no'}}</p>
+	<p>{{!ok?'yes':'no'}}</p>
+	<p v-if='!ok'>123456</p>
+	<p v-if='ok'>654321</p>
+	<div>{{fullName}}</div>
+	<div class="static" v-bind:class="{'class-a':isA,'class-b':isB}"></div>
+	<div v-if='ok'>123456</div>
+	<div v-else>654321</div>
+	<div v-show='ok'>111111</div>
+	<div class='libiao'>
+		<input id="newtodo" v-model='newtodo' @keyup.enter='addtodo'>
+		<input type="button" value="tianjia" @click="tianjia">
+		<ul>
+			<li v-for='todu in totus'>
+		      <span>{{ todu.name }}</span>
+		      <button v-on:click="removetodo($index)">X</button>
+			</li>
+		</ul>
+	</div>
+	<div class="form">
+		<span>message is {{messaga}}</span>
+		<input type="text" v-model='messaga' placeholder='edit me'>
+		<input type="checkbox" id="checkbox" v-model="checked">
+		<label for="checkbox">{{ checked }}</label>
+		
+	</div>
+	<div class="select">
+		<input type="radio" v-model='picked' value="a">
+		<input type="checkbox" v-model='toggle'>
+		<select v-model='selected'>
+			<option value="abc">abc</option>
+		</select>
+	</div>
+	<div class="trans">
+		<div v-if='show' transition='expand'>hello</div>
+		<div v-if="show" :transition="transitionName">hello</div>
+		<button v-on:click='toggles'>Toggle</button>
+	</div>
+	<my-tabble></my-tabble>
+	<div>
+		<my-ul>
+			
+		</my-ul>
+	</div>
+	<div>
+		
+	</div>
+</div>
+</body>
+</html>
+<style>
+	.expend-transition{
+		transition:all .3s ease;
+		height:30px;
+		padding:10px;
+		background:#eee;
+		overflow:hidden;
+	}
+	.expand-enter, .expand-leave{
+		height:0;
+		padding:0 10px;
+		opacity:0;
+	}
+</style>
+<script>
+	// new Vue({
+	// 	el:"#app",
+	// 	data:{
+	// 		message:'hello world',
+	// 		todos:[
+	// 			{text:'learn'},
+	// 			{text:'lasdi'},
+	// 			{text:'sielie'}
+	// 		],
+	// 		getting:true
+	// 	},
+	// 	methods:{
+	// 		chooseget:function(){
+	// 			this.getting=false;
+	// 		}
+	// 	}
+	// })
+	var MyTabble=Vue.extend({
+		template:'<div>Acostom component!</div>'
+	})
+	Vue.component('my-tabble',MyTabble)
+	var MyLi=Vue.extend({
+		props:['msg'],
+		template:'<span  some-prop="1">{{ msg }}</span>'
+	})
+	var MyUl=Vue.extend({
+		template:'<li><my-li msg="hello"></my-li></li>',
+		component:{
+			'my-li':MyLi
+		}
+	})
+	Vue.component('my-li',MyLi)
+	Vue.component('my-ul',MyUl)
+	var data={a:1}
+	var vm = new Vue({
+		el:'#app',
+		data:{
+			a:data,
+	 		getting:true,
+	 		message:'adf',
+	 		todos:[
+				{text:'learn'},
+				{text:'lasdi'},
+				{text:'sielie'}
+			],
+			vhtml:"<span>adsfasdf</span>",
+			number:1,
+			ok:true,
+			p1html:'<p>123456</p>',
+			p2html:'<p>654321</p>',
+			firstName:'foo',
+			lastname:'bar',
+			isA:true,
+			isB:false,
+			newtodo:'',
+			totus:[
+				{name:'siel'},
+				{name:'sito'}
+			],
+			messaga:'',
+			checked:true,
+		    show: false,
+		    transitionName: 'fade',
+		    transitionState: 'Idle'
+		},
+		transitions: {
+		    expand: {
+		      beforeEnter: function (el) {
+		        el.textContent = 'beforeEnter'
+		      },
+		      enter: function (el) {
+		        el.textContent = 'enter'
+		      },
+		      afterEnter: function (el) {
+		        el.textContent = 'afterEnter'
+		      },
+		      beforeLeave: function (el) {
+		        el.textContent = 'beforeLeave'
+		      },
+		      leave: function (el) {
+		        el.textContent = 'leave'
+		      },
+		      afterLeave: function (el) {
+		        el.textContent = 'afterLeave'
+		      }
+		    }
+		  },
+		computed:{
+			// fullName:{
+			// 	// get:function(){
+			// 	// 	return this.firstName+' '+ this.lastname
+			// 	// },
+			// 	// set:function(newValue){
+			// 	// 	var names= newValue.split(' ')
+			// 	// 	this.firstName=names[0]
+			// 	// 	this.lastname=names[names.length-1]
+			// 	// }
+			// }
+			fullName:function(){
+				return this.firstName + ' '+this.lastname
+			}
+		},
+		methods:{
+			chooseget:function(){
+				this.getting=false;
+			},
+			addtodo:function(){
+				var text=this.newtodo.trim();
+				if(text){
+					this.totus.push({name:text});
+					this.newtodo='';
+				}
+			},
+			tianjia:function(){
+				var name=document.getElementById('newtodo').value;
+				if(name){
+					this.totus.push({name:name});
+					this.newtodo='';
+				}
+			},
+			removetodo:function(index){
+				this.totus.splice(index,1);
+			},
+			toggles:function(){
+				this.show=!this.show;
+			}
+		}
+	})
+	Vue.transition('expand',{
+		beforeEnter: function (el) {
+			el.textContent = 'beforeEnter'
+		},
+		enter: function (el) {
+			el.textContent = 'enter'
+		},
+		afterEnter: function (el) {
+			el.textContent = 'afterEnter'
+		},
+		enterCancelled: function (el) {
+		// handle cancellation
+		},
+		beforeLeave: function (el) {
+			el.textContent = 'beforeLeave'
+		},
+		leave: function (el) {
+			el.textContent = 'leave'
+		},
+		afterLeave: function (el) {
+			el.textContent = 'afterLeave'
+		},
+		leaveCancelled: function (el) {
+		// handle cancellation
+		}
+	})
+	console.log(vm.a.a===data.a);
+	console.log(vm.a.a);
+	console.log(data.a);
+	vm.a.a=2;
+	console.log(data.a);
+	data.a=3;
+	console.log(vm.a.a);
+	console.log(vm.$data===data);
+	console.log(vm.$el===document.getElementById('app'));
+	vm.$watch('a.a',function(newVal,oldVal){
+		console.log(newVal);
+		console.log(oldVal);
+	})
+	vm.a.a=4;
+	console.log(vm.a.a);
+</script>

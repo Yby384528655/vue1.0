@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>canvas</title>
+</head>
+<body>
+<canvas id="canvas">
+	
+</canvas>
+</body>
+</html>
+<script>
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+	ctx.fillStyle='red';
+	ctx.fillRect(10,10,500,500);
+	ctx.beginPath();
+	ctx.moveTo(200,100);
+	ctx.lineTo(300,150);
+	ctx.lineTo(300,50);
+	ctx.fill();
+	ctx.fillStyle='blue';
+	ctx.beginPath();
+	ctx.arc(165,60,50,0,Math.PI*2,true);
+	ctx.stroke();
+	ctx.fill();
+	ctx.beginPath();
+	ctx.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle
+    ctx.moveTo(110, 75);
+    ctx.arc(75, 75, 35, 0, Math.PI, false);  // Mouth (clockwise)
+    ctx.moveTo(65, 65);
+    ctx.arc(60, 65, 5, 0, Math.PI * 2, true);  // Left eye
+    ctx.moveTo(95, 65);
+    ctx.arc(90, 65, 5, 0, Math.PI * 2, true);  // Right eye
+	ctx.stroke();
+</script>

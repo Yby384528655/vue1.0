@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>3</title>
+	<script src='vue.js'></script>
+</head>
+<body>
+<div id="app">
+	<template id="home"><div>home</div></template>
+	<template id="posts"><div>posts</div></template>
+	<template id="archive"><div>archive</div></template>
+	<template id="my-component">
+		<div>{{{currentViewq}}}</div>
+	</template>
+	<div>
+		<my-component v-bind:current-viewq=currentView></my-component>
+		<component :is='currentView'></component >
+	</div>
+</div>
+</body>
+</html>
+<script>
+	var home= Vue.extend({template:'#home'})
+	var posts= Vue.extend({template:'#posts'})
+	var archive= Vue.extend({template:'#archive'})
+	// Vue.component('home',{
+	// 	template:'#home'
+	// })
+	// Vue.component('posts',{
+	// 	template:'#posts'
+	// })
+	// Vue.component('archive',{
+	// 	template:'#archive'
+	// })
+	Vue.component('my-component',{
+		props:['currentViewq'],
+		template:'#my-component'
+	})
+	new Vue({
+		el:'#app',
+		data:{
+			currentView:'home'
+		},
+		components:{
+			home,posts,archive
+		}
+	})
+	// 动态组件
+</script>
